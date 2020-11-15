@@ -14,6 +14,8 @@
 
 @implementation ViewController
 
+struct rebinding nslog;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -21,7 +23,7 @@
     NSLog(@"hello");
     
     //rebinding结构体
-    struct rebinding nslog;
+    
     
     //需要HOOK的函数名称，C字符串
     nslog.name = "NSLog";
@@ -29,7 +31,7 @@
     //将系统库函数所指向的符号，在运行时重新绑定到用户指定的函数地址
     nslog.replacement = myNslog;
     
-    //将原系统函数的真实地址赋值到用户指定的指针上
+    //将原系统库函数的真实地址赋值到用户指定的函数指针上
     nslog.replaced = (void*)&sys_nslog;
     
     //rebinding结构体数组
